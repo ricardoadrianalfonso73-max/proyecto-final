@@ -1,0 +1,246 @@
+
+/* ===== ADMINISTRACIÓN DE SERVICIO TÉCNICO ===== */
+
+.admin-service-container {
+  width: 100%;
+  color: #fff;
+}
+
+/* ENCABEZADO */
+
+.admin-service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.admin-service-header h2 {
+  color: #00ff55;
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.admin-service-header p {
+  color: #aaa;
+  font-size: 14px;
+}
+
+/* BOTONES */
+
+.admin-service-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-service-refresh,
+.admin-service-back {
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.admin-service-refresh {
+  background: #00ff55;
+  color: #050505;
+  border: none;
+}
+
+.admin-service-refresh:hover {
+  background: #00cc44;
+}
+
+.admin-service-refresh:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.admin-service-back {
+  background: #292929;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+.admin-service-back:hover {
+  background: #383838;
+}
+
+/* MENSAJES */
+
+.admin-service-message {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.admin-service-message.error {
+  background: #351414;
+  color: #ff7777;
+}
+
+.admin-service-message.success {
+  background: #12351c;
+  color: #00ff55;
+}
+
+.admin-service-loading {
+  color: #00ff55;
+  padding: 20px 0;
+}
+
+/* SIN SOLICITUDES */
+
+.admin-service-empty {
+  background: #151515;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  color: #aaa;
+  border: 1px solid #292929;
+}
+
+/* TARJETA */
+
+.admin-service-card {
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 18px;
+}
+
+.admin-service-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.admin-service-card-header h3 {
+  color: #00ff55;
+  font-size: 20px;
+}
+
+/* ESTADO */
+
+.admin-service-status {
+  background: #222;
+  padding: 8px 12px;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+.admin-service-status.delivered {
+  color: #00ff55;
+}
+
+.admin-service-status.pending {
+  color: #ffc107;
+}
+
+/* DATOS DEL CLIENTE */
+
+.admin-service-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.admin-service-detail p {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.admin-service-detail span {
+  color: #fff;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+/* PROBLEMA */
+
+.admin-service-problem-title {
+  color: #888;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.admin-service-problem {
+  background: #101010;
+  color: #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-bottom: 20px;
+}
+
+/* CAMBIO DE ESTADO */
+
+.admin-service-status-control {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-service-status-control label {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.admin-service-status-control select {
+  background: #222;
+  color: #fff;
+  border: 1px solid #00ff55;
+  border-radius: 7px;
+  padding: 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+.admin-service-status-control select:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.admin-service-updating {
+  color: #00ff55;
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+  .admin-service-header h2 {
+    font-size: 21px;
+  }
+
+  .admin-service-card {
+    padding: 16px;
+  }
+
+  .admin-service-card-header h3 {
+    font-size: 17px;
+  }
+
+  .admin-service-actions {
+    width: 100%;
+  }
+
+  .admin-service-refresh,
+  .admin-service-back {
+    flex: 1;
+  }
+}

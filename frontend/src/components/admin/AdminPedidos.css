@@ -1,0 +1,245 @@
+
+/* ===== ADMINISTRACIÓN DE PEDIDOS ===== */
+
+.admin-pedidos {
+  width: 100%;
+  color: #f5f5f5;
+}
+
+/* ENCABEZADO */
+
+.admin-pedidos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.admin-pedidos-header h2 {
+  color: #00ff55;
+  font-size: 26px;
+  margin: 0 0 8px;
+}
+
+.admin-pedidos-header p {
+  color: #aaaaaa;
+  margin: 0;
+}
+
+.admin-pedidos-acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-pedidos-acciones button {
+  border-radius: 8px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-pedidos-actualizar {
+  background: #00ff55;
+  color: #050505;
+  border: none;
+  font-weight: bold;
+}
+
+.admin-pedidos-actualizar:hover:not(:disabled) {
+  background: #00d947;
+}
+
+.admin-pedidos-volver {
+  background: #292929;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+
+.admin-pedidos-volver:hover {
+  background: #383838;
+}
+
+.admin-pedidos-acciones button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* MENSAJES */
+
+.admin-pedidos-error {
+  background: #351414;
+  color: #ff7777;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.admin-pedidos-cargando {
+  color: #00ff55;
+  padding: 20px 0;
+}
+
+.admin-pedidos-vacio {
+  background: #151515;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  color: #aaaaaa;
+}
+
+/* TARJETA DEL PEDIDO */
+
+.admin-pedido-card {
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 18px;
+}
+
+.admin-pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.admin-pedido-header h3 {
+  color: #00ff55;
+  font-size: 20px;
+  margin: 0;
+}
+
+.admin-pedido-header span {
+  color: #aaaaaa;
+  font-size: 13px;
+}
+
+/* DATOS DEL CLIENTE */
+
+.admin-pedido-datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.admin-pedido-dato p:first-child {
+  color: #888888;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.admin-pedido-dato p:last-child {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.admin-pedido-dato p.total {
+  color: #00ff55;
+  font-size: 18px;
+}
+
+/* PRODUCTOS COMPRADOS */
+
+.admin-pedido-productos-titulo {
+  color: #00ff55;
+  margin: 0 0 12px;
+}
+
+.admin-pedido-productos {
+  background: #101010;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+}
+
+.admin-pedido-item {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #292929;
+  color: #cccccc;
+}
+
+.admin-pedido-item:last-child {
+  border-bottom: none;
+}
+
+/* ESTADO DEL PEDIDO */
+
+.admin-pedido-estado {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-pedido-estado label {
+  color: #aaaaaa;
+}
+
+.admin-pedido-estado select {
+  background: #222222;
+  color: #ffffff;
+  border: 1px solid #00ff55;
+  border-radius: 7px;
+  padding: 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+.admin-pedido-estado select:focus {
+  border-color: #ffffff;
+}
+
+.admin-pedido-estado select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-pedido-actualizando {
+  color: #00ff55;
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+  .admin-pedidos-header {
+    align-items: stretch;
+  }
+
+  .admin-pedidos-acciones {
+    width: 100%;
+  }
+
+  .admin-pedidos-acciones button {
+    flex: 1;
+  }
+
+  .admin-pedido-card {
+    padding: 16px;
+  }
+
+  .admin-pedido-item {
+    flex-direction: column;
+  }
+
+  .admin-pedido-estado {
+    align-items: flex-start;
+  }
+
+  .admin-pedido-estado select {
+    width: 100%;
+  }
+}

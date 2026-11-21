@@ -1,0 +1,311 @@
+
+/* =====================================
+   CONTACTO - ELECTRO TECNO
+===================================== */
+
+.contact-page {
+  min-height: 100vh;
+  background: #050505;
+  color: #ffffff;
+}
+
+/* ENCABEZADO */
+
+.contact-hero {
+  padding: 90px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #080808, #151515);
+}
+
+.contact-eyebrow,
+.contact-label {
+  color: #00ff55;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.contact-hero h1 {
+  margin: 18px 0;
+  font-size: clamp(30px, 5vw, 48px);
+}
+
+.contact-hero h1 span,
+.contact-information h2 span {
+  color: #00ff55;
+}
+
+.contact-hero p {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #aaaaaa;
+  line-height: 1.7;
+}
+
+/* CONTENIDO */
+
+.contact-content {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 70px 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+.contact-information h2 {
+  margin: 15px 0;
+  font-size: 30px;
+}
+
+.contact-information-text {
+  color: #aaaaaa;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+/* DATOS DE CONTACTO */
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.contact-detail-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #00ff55;
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 10px;
+}
+
+.contact-detail strong,
+.contact-detail span {
+  display: block;
+}
+
+.contact-detail strong {
+  margin-bottom: 5px;
+}
+
+.contact-detail span {
+  color: #aaaaaa;
+  font-size: 14px;
+}
+
+/* REDES SOCIALES */
+
+.contact-socials {
+  margin-top: 35px;
+}
+
+.contact-socials > span {
+  display: block;
+  margin-bottom: 15px;
+  color: #00ff55;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.contact-social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.contact-social-icons a {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #00ff55;
+  background: #151515;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.contact-social-icons a:hover {
+  color: #000000;
+  background: #00ff55;
+}
+
+/* FORMULARIO */
+
+.contact-form-card {
+  padding: 35px;
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 15px;
+}
+
+.contact-form-heading {
+  margin-bottom: 25px;
+}
+
+.contact-form-heading span {
+  color: #00ff55;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.contact-form-heading h2 {
+  margin-top: 10px;
+  font-size: 28px;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 18px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px;
+  color: #ffffff;
+  background: #080808;
+  border: 1px solid #444444;
+  border-radius: 8px;
+  outline: none;
+  box-sizing: border-box;
+  font: inherit;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #00ff55;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #777777;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+/* ERRORES Y BOTONES */
+
+.contact-error {
+  color: #ff5555;
+  margin-bottom: 15px;
+}
+
+.contact-submit {
+  width: 100%;
+  padding: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: #000000;
+  background: #00ff55;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.contact-submit:hover:not(:disabled) {
+  background: #00d948;
+}
+
+.contact-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* MENSAJE DE ÉXITO */
+
+.contact-success {
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.contact-success-icon {
+  color: #00ff55;
+  margin-bottom: 20px;
+}
+
+.contact-success h2 {
+  color: #00ff55;
+  margin-bottom: 15px;
+}
+
+.contact-success p {
+  color: #aaaaaa;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+/* PIE DE CONTACTO */
+
+.contact-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 35px 20px;
+  background: #111111;
+  border-top: 1px solid #292929;
+}
+
+.contact-bottom-icon {
+  color: #00ff55;
+}
+
+.contact-bottom h2 {
+  margin-bottom: 5px;
+}
+
+.contact-bottom p {
+  color: #aaaaaa;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding: 45px 20px;
+  }
+
+  .contact-hero {
+    padding: 65px 20px;
+  }
+
+  .contact-information h2 {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form-card {
+    padding: 24px 18px;
+  }
+
+  .contact-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}

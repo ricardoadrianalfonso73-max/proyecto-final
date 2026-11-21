@@ -1,0 +1,239 @@
+
+/* ===== ADMINISTRACIÓN DE CONSULTAS ===== */
+
+.admin-consultas {
+  width: 100%;
+  color: #f5f5f5;
+}
+
+/* ENCABEZADO */
+
+.admin-consultas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.admin-consultas-header h2 {
+  color: #00ff55;
+  font-size: 26px;
+  margin: 0 0 8px;
+}
+
+.admin-consultas-header p {
+  color: #aaaaaa;
+  margin: 0;
+}
+
+.admin-consultas-acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-consultas-acciones button {
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-consultas-actualizar {
+  background: #00ff55;
+  color: #050505;
+  border: none;
+}
+
+.admin-consultas-actualizar:hover:not(:disabled) {
+  background: #00d947;
+}
+
+.admin-consultas-volver {
+  background: #292929;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+
+.admin-consultas-volver:hover {
+  background: #383838;
+}
+
+.admin-consultas-acciones button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* MENSAJES */
+
+.admin-consultas-mensaje {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.admin-consultas-mensaje.error {
+  background: #351414;
+  color: #ff7777;
+}
+
+.admin-consultas-mensaje.success {
+  background: #12351c;
+  color: #00ff55;
+}
+
+.admin-consultas-cargando {
+  color: #00ff55;
+  padding: 20px 0;
+}
+
+.admin-consultas-vacio {
+  background: #151515;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  color: #aaaaaa;
+}
+
+/* TARJETA */
+
+.admin-consulta-card {
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  padding: 22px;
+  margin-bottom: 18px;
+}
+
+/* CABECERA DE CONSULTA */
+
+.admin-consulta-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.admin-consulta-header h3 {
+  color: #00ff55;
+  font-size: 19px;
+  margin: 0;
+}
+
+.admin-consulta-estado {
+  background: #222222;
+  padding: 7px 12px;
+  border-radius: 7px;
+  font-size: 13px;
+}
+
+.admin-consulta-estado.respondida {
+  color: #00ff55;
+}
+
+.admin-consulta-estado.pendiente {
+  color: #ffc107;
+}
+
+/* INFORMACIÓN */
+
+.admin-consulta-etiqueta {
+  color: #888888;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.admin-consulta-nombre {
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.admin-consulta-correo {
+  color: #00ff55;
+  margin-bottom: 15px;
+  overflow-wrap: anywhere;
+}
+
+/* MENSAJE DEL CLIENTE */
+
+.admin-consulta-mensaje-texto {
+  background: #101010;
+  color: #dddddd;
+  padding: 15px;
+  border-radius: 8px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-bottom: 15px;
+}
+
+/* FECHA */
+
+.admin-consulta-fecha {
+  color: #888888;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+
+/* BOTÓN DE ESTADO */
+
+.admin-consulta-boton {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-consulta-boton.respondida {
+  background: #00ff55;
+  color: #050505;
+}
+
+.admin-consulta-boton.respondida:hover:not(:disabled) {
+  background: #00d947;
+}
+
+.admin-consulta-boton.pendiente {
+  background: #292929;
+  color: #ffffff;
+}
+
+.admin-consulta-boton.pendiente:hover:not(:disabled) {
+  background: #383838;
+}
+
+.admin-consulta-boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+  .admin-consultas-header {
+    align-items: stretch;
+  }
+
+  .admin-consultas-acciones {
+    width: 100%;
+  }
+
+  .admin-consultas-acciones button {
+    flex: 1;
+  }
+
+  .admin-consulta-card {
+    padding: 16px;
+  }
+
+  .admin-consulta-boton {
+    width: 100%;
+  }
+}

@@ -1,0 +1,164 @@
+
+/* =====================================
+   PANEL DE ADMINISTRACIÓN
+===================================== */
+
+.admin-page {
+  min-height: 80vh;
+  background: #050505;
+  color: #ffffff;
+  padding: 40px 6%;
+  box-sizing: border-box;
+}
+
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =====================================
+   ENCABEZADO
+===================================== */
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.admin-heading {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-title {
+  color: #00ff55;
+  font-size: 32px;
+  margin: 0 0 10px;
+}
+
+.admin-welcome {
+  color: #aaaaaa;
+  margin: 0;
+}
+
+/* =====================================
+   BOTÓN CERRAR SESIÓN
+===================================== */
+
+.admin-logout-button {
+  background: #00ff55;
+  color: #050505;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.admin-logout-button:hover {
+  background: #00d948;
+  transform: translateY(-2px);
+}
+
+/* =====================================
+   TARJETAS PRINCIPALES
+===================================== */
+
+.admin-home {
+  width: 100%;
+}
+
+.admin-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.admin-card {
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  padding: 25px;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 0.2s ease, transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.admin-card:hover {
+  border-color: #00ff55;
+  background: #1b1b1b;
+  transform: translateY(-4px);
+}
+
+.admin-card-icon {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+.admin-card-title {
+  color: #00ff55;
+  font-size: 21px;
+  margin: 0 0 12px;
+}
+
+.admin-card-description {
+  color: #bbbbbb;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.admin-card-link {
+  color: #00ff55;
+  margin: 18px 0 0;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* =====================================
+   TEXTO INFERIOR
+===================================== */
+
+.admin-footer-text {
+  margin-top: 35px;
+  color: #888888;
+  font-size: 14px;
+}
+
+/* =====================================
+   DISEÑO RESPONSIVE
+===================================== */
+
+@media (max-width: 600px) {
+  .admin-page {
+    padding: 30px 5%;
+  }
+
+  .admin-header {
+    align-items: flex-start;
+  }
+
+  .admin-title {
+    font-size: 26px;
+  }
+
+  .admin-logout-button {
+    width: 100%;
+  }
+
+  .admin-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-card {
+    padding: 20px;
+  }
+}

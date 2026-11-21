@@ -1,0 +1,422 @@
+
+/* ===== SERVICIO TÉCNICO ===== */
+
+.technical-page {
+  background: #050505;
+  color: #f5f5f5;
+  min-height: 70vh;
+}
+
+.technical-hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 85px 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 55px;
+}
+
+.technical-label {
+  color: #00ff55;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.technical-hero-content h1 {
+  font-size: clamp(35px, 5vw, 58px);
+  line-height: 1.12;
+  margin: 22px 0;
+  font-weight: 900;
+}
+
+.technical-hero-content h1 span,
+.technical-section-heading h2 span {
+  color: #00ff55;
+}
+
+.technical-hero-content p {
+  color: #aaa;
+  line-height: 1.8;
+  font-size: 16px;
+  max-width: 520px;
+  margin-bottom: 30px;
+}
+
+.technical-main-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 8px;
+  padding: 16px 23px;
+  background: #00ff55;
+  color: #050505;
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.technical-main-button:hover {
+  background: #39ff7a;
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0, 255, 85, 0.25);
+}
+
+.technical-hero-image {
+  position: relative;
+  min-height: 350px;
+}
+
+.technical-hero-image img {
+  width: 100%;
+  height: 390px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 85, 0.3);
+}
+
+.technical-image-tag {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(5, 5, 5, 0.9);
+  color: #00ff55;
+  padding: 13px 17px;
+  border: 1px solid rgba(0, 255, 85, 0.35);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.technical-services-section {
+  padding: 75px 25px;
+  background: #101010;
+}
+
+.technical-section-heading {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto 45px;
+}
+
+.technical-section-heading h2 {
+  font-size: 36px;
+  margin: 15px 0;
+  font-weight: 900;
+}
+
+.technical-section-heading p {
+  color: #999;
+  line-height: 1.7;
+}
+
+.technical-services-grid {
+  max-width: 1150px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.technical-service-card {
+  background: #151515;
+  border: 1px solid #252525;
+  border-radius: 12px;
+  padding: 28px 22px;
+  transition: 0.25s;
+}
+
+.technical-service-card:hover {
+  border-color: #00ff55;
+  transform: translateY(-5px);
+}
+
+.technical-service-icon {
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff55;
+  background: rgba(0, 255, 85, 0.08);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.technical-service-card h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.technical-service-card p {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.technical-benefits {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 35px 25px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.technical-benefits div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.technical-benefits svg {
+  color: #00ff55;
+}
+
+.technical-cta {
+  text-align: center;
+  padding: 65px 25px;
+  background: #101010;
+}
+
+.technical-cta h2 {
+  font-size: clamp(23px, 4vw, 34px);
+  margin-bottom: 15px;
+}
+
+.technical-cta p {
+  color: #999;
+  margin-bottom: 25px;
+  line-height: 1.7;
+}
+
+/* ===== MODAL DE SERVICIO TÉCNICO ===== */
+
+.tech-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.tech-modal {
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  background: #101010;
+  border: 1px solid rgba(0, 255, 85, 0.4);
+  border-radius: 15px;
+  padding: 35px;
+  box-shadow: 0 0 40px rgba(0, 255, 85, 0.1);
+}
+
+.tech-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: 0;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.tech-modal-close:hover {
+  color: #00ff55;
+}
+
+.tech-modal-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.tech-modal-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff55;
+  background: rgba(0, 255, 85, 0.1);
+  border-radius: 10px;
+}
+
+.tech-eyebrow {
+  color: #00ff55;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.tech-modal-heading h2 {
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.tech-modal-description {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.tech-form {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+}
+
+.tech-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #ddd;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.tech-form input,
+.tech-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 14px;
+  background: #080808;
+  border: 1px solid #333;
+  border-radius: 7px;
+  color: #fff;
+  font: inherit;
+  outline: none;
+  resize: vertical;
+}
+
+.tech-form input:focus,
+.tech-form textarea:focus {
+  border-color: #00ff55;
+}
+
+.tech-form input::placeholder,
+.tech-form textarea::placeholder {
+  color: #666;
+}
+
+.tech-submit-button {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #00ff55;
+  color: #050505;
+  border: 0;
+  border-radius: 7px;
+  font-weight: 900;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.tech-submit-button:hover {
+  background: #39ff7a;
+}
+
+.tech-success {
+  text-align: center;
+  padding: 50px 35px;
+}
+
+.tech-success-icon {
+  color: #00ff55;
+  margin-bottom: 20px;
+}
+
+.tech-success h2 {
+  margin-bottom: 15px;
+}
+
+.tech-success p {
+  color: #aaa;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+/* ===== RESPONSIVE SERVICIO TÉCNICO ===== */
+
+@media (max-width: 850px) {
+  .technical-hero {
+    grid-template-columns: 1fr;
+    padding-top: 55px;
+    gap: 35px;
+  }
+
+  .technical-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .technical-hero-image img {
+    height: 330px;
+  }
+}
+
+@media (max-width: 520px) {
+  .technical-hero {
+    padding: 45px 18px;
+  }
+
+  .technical-services-section {
+    padding: 55px 18px;
+  }
+
+  .technical-services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .technical-section-heading h2 {
+    font-size: 29px;
+  }
+
+  .technical-benefits {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 30px 22px;
+  }
+
+  .tech-modal {
+    padding: 28px 20px;
+  }
+
+  .technical-hero-image img {
+    height: 260px;
+  }
+}
+
+.tech-error {
+  color: #ff6565;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.tech-submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

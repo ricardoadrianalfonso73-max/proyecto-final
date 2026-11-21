@@ -1,0 +1,172 @@
+
+/* ===== FORMULARIO DE PRODUCTOS ===== */
+
+.formulario-producto {
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 30px;
+  color: #f5f5f5;
+}
+
+.formulario-producto-titulo {
+  color: #00ff55;
+  font-size: 22px;
+  margin: 0 0 24px;
+}
+
+/* CAMPOS */
+
+.formulario-campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+  min-width: 0;
+}
+
+.formulario-campo label {
+  display: block;
+  margin-bottom: 6px;
+  color: #cccccc;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.formulario-campo input,
+.formulario-campo textarea,
+.formulario-campo select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #1a1a1a;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.formulario-campo input:focus,
+.formulario-campo textarea:focus,
+.formulario-campo select:focus {
+  border-color: #00ff55;
+}
+
+.formulario-campo textarea {
+  resize: vertical;
+  min-height: 85px;
+}
+
+.formulario-campo select {
+  cursor: pointer;
+}
+
+.formulario-archivo {
+  padding: 12px !important;
+}
+
+/* GRILLAS */
+
+.formulario-grilla {
+  display: grid;
+  gap: 18px;
+}
+
+.formulario-grilla.dos-columnas {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.formulario-grilla.tres-columnas {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* VISTA PREVIA */
+
+.formulario-preview {
+  margin: 5px 0 22px;
+}
+
+.formulario-preview p {
+  color: #cccccc;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.formulario-preview img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+/* BOTONES */
+
+.formulario-botones {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.formulario-guardar,
+.formulario-cancelar {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.formulario-guardar {
+  background: #00ff55;
+  color: #050505;
+}
+
+.formulario-guardar:hover:not(:disabled) {
+  background: #00d947;
+}
+
+.formulario-cancelar {
+  background: #333;
+  color: #ffffff;
+}
+
+.formulario-cancelar:hover:not(:disabled) {
+  background: #444;
+}
+
+.formulario-guardar:disabled,
+.formulario-cancelar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+  .formulario-producto {
+    padding: 18px;
+  }
+
+  .formulario-grilla.dos-columnas,
+  .formulario-grilla.tres-columnas {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .formulario-botones {
+    flex-direction: column;
+  }
+
+  .formulario-guardar,
+  .formulario-cancelar {
+    width: 100%;
+  }
+}

@@ -1,0 +1,119 @@
+
+/* =====================================
+   PÁGINA DE INICIO DE SESIÓN
+===================================== */
+
+.login-page {
+  min-height: 80vh;
+  background: #050505;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  box-sizing: border-box;
+}
+
+/* =====================================
+   FORMULARIO
+===================================== */
+
+.login-form {
+  width: 100%;
+  max-width: 420px;
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 15px;
+  padding: 35px;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* =====================================
+   TÍTULOS
+===================================== */
+
+.login-title {
+  color: #00ff55;
+  text-align: center;
+  margin: 0 0 10px;
+}
+
+.login-subtitle {
+  color: #aaaaaa;
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+/* =====================================
+   CAMPOS
+===================================== */
+
+.login-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.login-input {
+  width: 100%;
+  padding: 13px;
+  margin-bottom: 20px;
+  background: #080808;
+  border: 1px solid #444444;
+  border-radius: 8px;
+  color: #ffffff;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.login-input:focus {
+  border-color: #00ff55;
+}
+
+.login-input::placeholder {
+  color: #777777;
+}
+
+/* =====================================
+   MENSAJE DE ERROR
+===================================== */
+
+.login-error {
+  color: #ff5555;
+  margin-bottom: 15px;
+}
+
+/* =====================================
+   BOTÓN
+===================================== */
+
+.login-button {
+  width: 100%;
+  padding: 14px;
+  background: #00ff55;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.login-button:hover:not(:disabled) {
+  background: #00d948;
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =====================================
+   RESPONSIVE
+===================================== */
+
+@media (max-width: 480px) {
+  .login-form {
+    padding: 25px 20px;
+  }
+}

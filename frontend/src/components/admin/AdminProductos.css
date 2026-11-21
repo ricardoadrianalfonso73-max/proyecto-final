@@ -1,0 +1,246 @@
+
+/* ===== ADMINISTRACIÓN DE PRODUCTOS ===== */
+
+.admin-productos {
+  width: 100%;
+  color: #f5f5f5;
+}
+
+/* ENCABEZADO */
+
+.admin-productos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.admin-productos-header h2 {
+  color: #00ff55;
+  font-size: 26px;
+  margin: 0 0 8px;
+}
+
+.admin-productos-header p {
+  color: #aaaaaa;
+  margin: 0;
+}
+
+.admin-productos-acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-productos-acciones button {
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-productos-agregar {
+  background: #00ff55;
+  color: #050505;
+  border: none;
+}
+
+.admin-productos-agregar:hover {
+  background: #00d947;
+}
+
+.admin-productos-actualizar,
+.admin-productos-volver {
+  background: #292929;
+  color: #ffffff;
+  border: 1px solid #444;
+}
+
+.admin-productos-actualizar:hover,
+.admin-productos-volver:hover {
+  background: #383838;
+}
+
+.admin-productos-acciones button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* MENSAJES */
+
+.admin-productos-mensaje {
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.admin-productos-mensaje.error {
+  background: #351414;
+  color: #ff7777;
+}
+
+.admin-productos-mensaje.success {
+  background: #12351c;
+  color: #00ff55;
+}
+
+/* ESTADOS */
+
+.admin-productos-cargando {
+  color: #00ff55;
+  padding: 20px 0;
+}
+
+.admin-productos-vacio {
+  background: #151515;
+  padding: 30px;
+  border-radius: 12px;
+  color: #aaaaaa;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* GRILLA */
+
+.admin-productos-grilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* TARJETAS */
+
+.admin-producto-card {
+  background: #151515;
+  border: 1px solid #292929;
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 0;
+}
+
+.admin-producto-imagen,
+.admin-producto-sin-imagen {
+  width: 100%;
+  height: 160px;
+  box-sizing: border-box;
+  background: #101010;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.admin-producto-imagen {
+  object-fit: contain;
+}
+
+.admin-producto-sin-imagen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888888;
+}
+
+.admin-producto-card h3 {
+  color: #00ff55;
+  font-size: 19px;
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+}
+
+.admin-producto-categoria {
+  color: #aaaaaa;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.admin-producto-descripcion {
+  color: #cccccc;
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+
+.admin-producto-precio {
+  color: #00ff55;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.admin-producto-dato {
+  color: #aaaaaa;
+  margin-bottom: 8px;
+}
+
+.admin-producto-oferta {
+  color: #00ff55;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.admin-producto-activo {
+  color: #00ff55;
+  margin-bottom: 15px;
+  font-size: 13px;
+}
+
+/* BOTONES DE PRODUCTO */
+
+.admin-producto-botones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-producto-botones button {
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-producto-editar {
+  background: #00ff55;
+  color: #050505;
+  border: none;
+}
+
+.admin-producto-editar:hover:not(:disabled) {
+  background: #00d947;
+}
+
+.admin-producto-desactivar {
+  background: #471b1b;
+  color: #ff7777;
+  border: 1px solid #773333;
+}
+
+.admin-producto-desactivar:hover:not(:disabled) {
+  background: #602222;
+}
+
+.admin-producto-botones button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 600px) {
+  .admin-productos-header {
+    align-items: stretch;
+  }
+
+  .admin-productos-acciones {
+    width: 100%;
+  }
+
+  .admin-productos-acciones button {
+    flex: 1;
+  }
+
+  .admin-productos-grilla {
+    grid-template-columns: 1fr;
+  }
+}

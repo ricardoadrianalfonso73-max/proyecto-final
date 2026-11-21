@@ -1,0 +1,202 @@
+
+/* ===== MODAL DE SERVICIO TÉCNICO ===== */
+
+.tech-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+  background: rgba(0, 0, 0, .85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.tech-modal {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #101010;
+  color: #fff;
+  border: 1px solid rgba(0, 255, 85, .3);
+  border-radius: 15px;
+  padding: 35px;
+}
+
+/* CERRAR */
+
+.tech-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 35px;
+  height: 35px;
+  display: grid;
+  place-items: center;
+  background: #202020;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tech-modal-close:hover {
+  background: #00ff55;
+  color: #050505;
+}
+
+/* ENCABEZADO */
+
+.tech-modal-heading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.tech-modal-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 255, 85, .1);
+  color: #00ff55;
+  border-radius: 10px;
+}
+
+.tech-eyebrow {
+  color: #00ff55;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.tech-modal-heading h2 {
+  font-size: 19px;
+  margin-top: 5px;
+}
+
+.tech-modal-description {
+  color: #999;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+/* FORMULARIO */
+
+.tech-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tech-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #ddd;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tech-form input,
+.tech-form textarea {
+  width: 100%;
+  background: #181818;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 7px;
+  padding: 13px;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.tech-form input:focus,
+.tech-form textarea:focus {
+  border-color: #00ff55;
+}
+
+.tech-form textarea {
+  resize: vertical;
+}
+
+/* ERROR */
+
+.tech-error {
+  color: #ff5555;
+  font-size: 13px;
+}
+
+/* BOTÓN */
+
+.tech-submit-button {
+  width: 100%;
+  min-height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #00ff55;
+  color: #050505;
+  border: none;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.tech-submit-button:hover {
+  background: #00cc44;
+}
+
+.tech-submit-button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* CONFIRMACIÓN */
+
+.tech-success {
+  text-align: center;
+  padding-top: 55px;
+  padding-bottom: 40px;
+}
+
+.tech-success-icon {
+  width: 65px;
+  height: 65px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 20px;
+  color: #00ff55;
+}
+
+.tech-success h2 {
+  font-size: 21px;
+  margin-bottom: 15px;
+}
+
+.tech-success p {
+  color: #999;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 520px) {
+  .tech-modal {
+    padding: 28px 20px;
+  }
+
+  .tech-modal-heading h2 {
+    font-size: 16px;
+  }
+}
