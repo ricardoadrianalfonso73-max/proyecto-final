@@ -183,3 +183,173 @@
     font-size: 7px;
   }
 }
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.register-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: 1px solid #00e65c;
+  border-radius: 8px;
+  color: #00e65c;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.register-button:hover {
+  background: #00e65c;
+  color: #000;
+}
+
+/* =====================================
+   CUENTA DEL USUARIO
+===================================== */
+
+.account-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.account-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  background: #00ff55;
+  color: #050505;
+  padding: 9px 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  max-width: 190px;
+}
+
+.account-avatar {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #050505;
+  color: #00ff55;
+  border-radius: 50%;
+}
+
+.account-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 105px;
+}
+
+.account-chevron {
+  transition: transform 0.2s ease;
+}
+
+.account-chevron.open {
+  transform: rotate(180deg);
+}
+
+/* MENÚ DESPLEGABLE */
+
+.account-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 245px;
+  background: #101010;
+  border: 1px solid #252525;
+  border-radius: 10px;
+  padding: 10px;
+  z-index: 1000;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45);
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.account-info strong {
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.account-info span {
+  color: #aaaaaa;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.account-info small {
+  color: #00ff55;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.account-logout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-top: 1px solid #292929;
+  color: #ff5555;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  text-align: left;
+}
+
+.account-logout:hover {
+  background: #1c1c1c;
+  border-radius: 6px;
+}
+
+@media (max-width: 768px) {
+  .account-button {
+    padding: 7px 9px;
+    gap: 6px;
+  }
+
+  .account-name {
+    max-width: 75px;
+  }
+
+  .account-dropdown {
+    right: 0;
+    width: 230px;
+  }
+}
+.account-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 15px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.account-profile:hover {
+  background: rgba(0, 255, 85, 0.10);
+  color: #00ff55;
+}

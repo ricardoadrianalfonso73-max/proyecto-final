@@ -14,6 +14,8 @@ import TechnicalService from './pages/TechnicalService.js';
 import Contact from './pages/Contact.js';
 import Admin from './pages/Admin.js';
 import Login from './pages/Login.js';
+import Registro from './pages/Registro.js';
+import MiCuenta from './pages/MiCuenta.js';
 import ProtectedRoute from './components/ProtectedRoute.js';
 
 const h = React.createElement;
@@ -29,30 +31,49 @@ function Layout() {
   return h(React.Fragment, null,
     h(Header),
     h(Routes, null,
+
       h(Route, {
         path: '/',
         element: h(Home)
       }),
+
       h(Route, {
         path: '/productos',
         element: h(Products)
       }),
+
       h(Route, {
         path: '/servicio-tecnico',
         element: h(TechnicalService)
       }),
+
       h(Route, {
         path: '/contacto',
         element: h(Contact)
       }),
+
       h(Route, {
         path: '/login',
         element: h(Login)
       }),
+
+      h(Route, {
+        path: '/registro',
+        element: h(Registro)
+      }),
+
+      // CUENTA DEL CLIENTE
+      h(Route, {
+        path: '/mi-cuenta',
+        element: h(MiCuenta)
+      }),
+
+      // PANEL DE ADMINISTRACIÓN (SIN CAMBIOS)
       h(Route, {
         path: '/admin',
         element: h(ProtectedRoute, null, h(Admin))
       }),
+
       h(Route, {
         path: '*',
         element: h(Placeholder, {

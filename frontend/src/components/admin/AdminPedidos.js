@@ -65,7 +65,7 @@ function AdminPedidos({
         className: 'admin-pedido-card'
       },
 
-        // CABECERA DEL PEDIDO
+        // CABECERA
         h('div', { className: 'admin-pedido-header' },
 
           h('h3', null, `Pedido #${pedido.id}`),
@@ -94,6 +94,25 @@ function AdminPedidos({
               }, dato[1])
             )
           )
+        ),
+
+        // MEDIO DE PAGO
+        h('div', { className: 'admin-pedido-medio-pago' },
+
+          h('span', null, 'MEDIO DE PAGO'),
+
+          h('strong', null,
+            pedido.medio_pago || 'No especificado'
+          )
+        ),
+
+        // DIRECCIÓN
+        pedido.direccion &&
+        h('div', { className: 'admin-pedido-direccion' },
+
+          h('strong', null, 'Dirección de entrega: '),
+
+          pedido.direccion
         ),
 
         // PRODUCTOS COMPRADOS

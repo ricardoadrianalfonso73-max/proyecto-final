@@ -30,22 +30,33 @@ app.use(cors({
 
 app.use(express.json());
 
+// =====================================
+// CONECTAR RUTAS DE LA API
+// =====================================
 
-// Conectar rutas de la API
 app.use('/api', productosRouter);
 app.use('/api', pedidosRouter);
-app.use('/api', authRouter);
+
+// Autenticación de administradores y clientes
+app.use('/api/auth', authRouter);
+
 app.use('/api', contactoRouter);
 app.use('/api/servicio-tecnico', servicioTecnicoRouter);
 
-// Ruta principal
+// =====================================
+// RUTA PRINCIPAL
+// =====================================
+
 app.get('/', (req, res) => {
   res.json({
     mensaje: 'Electro Tecno funciona correctamente'
   });
 });
 
-// Estado de la API
+// =====================================
+// ESTADO DE LA API
+// =====================================
+
 app.get('/api/estado', (req, res) => {
   res.json({
     estado: 'OK',
@@ -53,7 +64,10 @@ app.get('/api/estado', (req, res) => {
   });
 });
 
-// Comprobar conexión con MySQL
+// =====================================
+// COMPROBAR CONEXIÓN CON MYSQL
+// =====================================
+
 app.get('/api/db-test', async (req, res) => {
   try {
     const [rows] = await db.query(
@@ -76,7 +90,10 @@ app.get('/api/db-test', async (req, res) => {
   }
 });
 
-// Ruta protegida para administradores
+// =====================================
+// RUTA PROTEGIDA PARA ADMINISTRADORES
+// =====================================
+
 app.get(
   '/api/admin/verificar',
   verificarToken,
@@ -90,7 +107,10 @@ app.get(
   }
 );
 
-// Ruta no encontrada
+// =====================================
+// RUTA NO ENCONTRADA
+// =====================================
+
 app.use((req, res) => {
   res.status(404).json({
     mensaje: 'La ruta solicitada no existe.',
@@ -98,7 +118,10 @@ app.use((req, res) => {
   });
 });
 
-// Iniciar servidor
+// =====================================
+// INICIAR SERVIDOR
+// =====================================
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

@@ -1,8 +1,9 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { iniciarSesionAdmin, iniciarSesionCliente } from '../services/api.js';
 
-import './/Login.css';
+import './Login.css';
 
 const h = React.createElement;
 
@@ -11,6 +12,7 @@ function Login() {
 
   const [correo, setCorreo] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [tipoUsuario, setTipoUsuario] = React.useState('cliente');
   const [error, setError] = React.useState('');
   const [loading, setLoading] = React.useState(false);
 
@@ -21,30 +23,44 @@ function Login() {
     setLoading(true);
 
     try {
-      const respuesta = await fetch('http://localhost:3000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          correo,
-          password
-        })
-      });
+      const datos = {
+        correo: correo.trim(),
+        password
+      };
 
-      const datos = await respuesta.json();
+      let respuesta;
 
-      if (!respuesta.ok) {
-        throw new Error(datos.mensaje || 'No se pudo iniciar sesión.');
+      if (tipoUsuario === 'admin') {
+        respuesta = await iniciarSesionAdmin(datos);
+
+        sessionStorage.setItem('adminToken', respuesta.token);
+        sessionStorage.setItem(
+          'adminUsuario',
+          JSON.stringify(respuesta.usuario)
+        );
+
+        sessionStorage.removeItem('clienteToken');
+        sessionStorage.removeItem('clienteUsuario');
+
+        navigate('/admin');
+
+      } else {
+        respuesta = await iniciarSesionCliente(datos);
+
+        sessionStorage.setItem('clienteToken', respuesta.token);
+        sessionStorage.setItem(
+          'clienteUsuario',
+          JSON.stringify(respuesta.usuario)
+        );
+
+        sessionStorage.removeItem('adminToken');
+        sessionStorage.removeItem('adminUsuario');
+
+        navigate('/productos');
       }
 
-      sessionStorage.setItem('adminToken', datos.token);
-      sessionStorage.setItem('adminUsuario', JSON.stringify(datos.usuario));
-
-      navigate('/admin');
-
     } catch (err) {
-      setError(err.message);
+      setError(err.message || 'No se pudo iniciar sesión.');
     } finally {
       setLoading(false);
     }
@@ -62,7 +78,20 @@ function Login() {
       ),
 
       h('p', { className: 'login-subtitle' },
-        'Acceso de administrador'
+        'Ingresá a tu cuenta'
+      ),
+
+      h('label', { className: 'login-label' },
+        'Tipo de usuario'
+      ),
+
+      h('select', {
+        className: 'login-input',
+        value: tipoUsuario,
+        onChange: (e) => setTipoUsuario(e.target.value)
+      },
+        h('option', { value: 'cliente' }, 'Cliente'),
+        h('option', { value: 'admin' }, 'Administrador')
       ),
 
       h('label', { className: 'login-label' },
@@ -99,7 +128,14 @@ function Login() {
         type: 'submit',
         disabled: loading,
         className: 'login-button'
-      }, loading ? 'Ingresando...' : 'INICIAR SESIÓN')
+      }, loading ? 'INGRESANDO...' : 'INICIAR SESIÓN'),
+
+      tipoUsuario === 'cliente' && h('p', {
+        className: 'login-register'
+      },
+        '¿Todavía no tenés cuenta? ',
+        h(Link, { to: '/registro' }, 'Registrate aquí')
+      )
     )
   );
 }

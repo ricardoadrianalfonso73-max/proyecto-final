@@ -1,6 +1,5 @@
 
 import React from 'react';
-
 import './Products.css';
 
 import {
@@ -11,7 +10,14 @@ import {
   Trash2,
   X,
   ArrowRight,
-  Tag
+  Tag,
+  CheckCircle2,
+  CreditCard,
+  Wallet,
+  Landmark,
+  Banknote,
+  Truck,
+  CalendarDays
 } from 'lucide-react';
 
 import ProductCard from '../components/ProductCard.js';
@@ -20,7 +26,52 @@ import ProductModal from '../components/ProductModal.js';
 const h = React.createElement;
 const API = 'http://localhost:3000';
 
-// Corregir la dirección de las imágenes
+// Calcular una fecha estimada de entrega a partir de hoy
+function calcularFechaEstimada() {
+  const fecha = new Date();
+  fecha.setDate(fecha.getDate() + 3);
+  return fecha;
+}
+
+// Formatear la fecha recibida desde el backend
+function formatearFechaEntrega(valor) {
+  if (!valor) {
+    return calcularFechaEstimada().toLocaleDateString('es-AR', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+  }
+
+  const coincidencia = String(valor).match(/^(\d{4})-(\d{2})-(\d{2})/);
+
+  if (coincidencia) {
+    const fecha = new Date(
+      Number(coincidencia[1]),
+      Number(coincidencia[2]) - 1,
+      Number(coincidencia[3])
+    );
+
+    return fecha.toLocaleDateString('es-AR', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+  }
+
+  const fecha = new Date(valor);
+
+  if (Number.isNaN(fecha.getTime())) {
+    return 'Dentro de 3 días';
+  }
+
+  return fecha.toLocaleDateString('es-AR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
 function obtenerImagen(imagen) {
   if (!imagen) return '';
 
@@ -37,7 +88,6 @@ function obtenerImagen(imagen) {
   return ruta;
 }
 
-// Convertir productos de la base de datos al formato de la tienda
 function formatearProductos(data) {
   return data
     .filter(product =>
@@ -78,6 +128,10 @@ function Products() {
   const [sendingOrder, setSendingOrder] = React.useState(false);
   const [checkoutError, setCheckoutError] = React.useState('');
 
+  const [medioPago, setMedioPago] = React.useState('Mercado Pago');
+
+  const [purchaseSuccess, setPurchaseSuccess] = React.useState(null);
+
   const [customer, setCustomer] = React.useState({
     nombre_cliente: '',
     correo: '',
@@ -85,7 +139,6 @@ function Products() {
     direccion: ''
   });
 
-  // Categorías de la tienda
   const categories = [
     'Todas',
     'Celulares',
@@ -93,7 +146,7 @@ function Products() {
     'Notebook'
   ];
 
-  // Cargar productos desde MySQL
+  // Cargar productos
   React.useEffect(() => {
     async function loadProducts() {
       try {
@@ -104,7 +157,6 @@ function Products() {
         }
 
         const data = await response.json();
-
         setProducts(formatearProductos(data));
 
       } catch (error) {
@@ -122,12 +174,10 @@ function Products() {
     loadProducts();
   }, []);
 
-  // Agregar producto al carrito
+  // Agregar al carrito
   function addToCart(product) {
     setCart(current => {
-      const existing = current.find(
-        item => item.id === product.id
-      );
+      const existing = current.find(item => item.id === product.id);
 
       if (existing) {
         return current.map(item =>
@@ -137,10 +187,7 @@ function Products() {
         );
       }
 
-      return [
-        ...current,
-        { ...product, quantity: 1 }
-      ];
+      return [...current, { ...product, quantity: 1 }];
     });
 
     setCartOpen(true);
@@ -176,7 +223,7 @@ function Products() {
     }));
   }
 
-  // Registrar pedido en el backend
+  // Registrar pedido
   async function finishPurchase(event) {
     event.preventDefault();
 
@@ -189,22 +236,31 @@ function Products() {
       setSendingOrder(true);
       setCheckoutError('');
 
-      const response = await fetch(
-        `${API}/api/pedidos`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            ...customer,
-            productos: cart.map(item => ({
-              id: item.id,
-              quantity: item.quantity
-            }))
-          })
-        }
-      );
+      const clienteToken = sessionStorage.getItem('clienteToken');
+
+      const response = await fetch(`${API}/api/pedidos`, {
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json',
+
+          ...(clienteToken
+            ? {
+                Authorization: `Bearer ${clienteToken}`
+              }
+            : {})
+        },
+
+        body: JSON.stringify({
+          ...customer,
+          medio_pago: medioPago,
+
+          productos: cart.map(item => ({
+            id: item.id,
+            quantity: item.quantity
+          }))
+        })
+      });
 
       const data = await response.json();
 
@@ -214,10 +270,15 @@ function Products() {
         );
       }
 
-      window.alert(
-        `${data.mensaje}\n\nNúmero de pedido: ${data.pedido_id}\nTotal: $${Number(data.total).toLocaleString('es-AR')}`
-      );
+      // Mostrar confirmación con fecha estimada del backend
+      setPurchaseSuccess({
+        pedidoId: data.pedido_id,
+        total: Number(data.total),
+        medioPago: medioPago,
+        fechaEntrega: data.fecha_estimada_entrega
+      });
 
+      // Limpiar carrito y cerrar ventanas
       setCart([]);
       setCheckoutOpen(false);
       setCartOpen(false);
@@ -229,17 +290,16 @@ function Products() {
         direccion: ''
       });
 
+      setMedioPago('Mercado Pago');
+
       // Actualizar catálogo y stock
       setLoading(true);
 
       try {
-        const productsResponse = await fetch(
-          `${API}/api/productos`
-        );
+        const productsResponse = await fetch(`${API}/api/productos`);
 
         if (productsResponse.ok) {
           const productsData = await productsResponse.json();
-
           setProducts(formatearProductos(productsData));
         }
 
@@ -262,12 +322,11 @@ function Products() {
     }
   }
 
-  // Buscar y filtrar productos
+  // Filtrar productos
   const filteredProducts = products.filter(product => {
     const matchesSearch =
       product.name.toLowerCase().includes(search.toLowerCase());
 
-    // Comparar las categorías sin distinguir mayúsculas ni tildes
     const categoriaProducto = String(product.category || '')
       .trim()
       .toLowerCase()
@@ -285,33 +344,24 @@ function Products() {
               .replace(/[\u0300-\u036f]/g, '')
       );
 
-    const matchesOffer =
-      !onlyOffers || product.isOffer;
+    const matchesOffer = !onlyOffers || product.isOffer;
 
     return matchesSearch && matchesCategory && matchesOffer;
   });
 
-  const offers = filteredProducts.filter(
-    product => product.isOffer
-  );
+  const offers = filteredProducts.filter(product => product.isOffer);
+  const regularProducts = filteredProducts.filter(product => !product.isOffer);
 
-  const regularProducts = filteredProducts.filter(
-    product => !product.isOffer
-  );
-
-  // Total de unidades
   const totalItems = cart.reduce(
     (total, item) => total + item.quantity,
     0
   );
 
-  // Subtotal del carrito
   const subtotal = cart.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );
 
-  // Mostrar tarjeta de producto
   function renderProduct(product) {
     return h(ProductCard, {
       key: product.id,
@@ -321,14 +371,41 @@ function Products() {
     });
   }
 
+  // Opciones de pago
+  const paymentMethods = [
+    {
+      nombre: 'Mercado Pago',
+      descripcion: 'Pago simulado con Mercado Pago',
+      icono: Wallet
+    },
+    {
+      nombre: 'Tarjeta de crédito',
+      descripcion: 'Pago simulado con tarjeta de crédito',
+      icono: CreditCard
+    },
+    {
+      nombre: 'Tarjeta de débito',
+      descripcion: 'Pago simulado con tarjeta de débito',
+      icono: CreditCard
+    },
+    {
+      nombre: 'Transferencia bancaria',
+      descripcion: 'Coordinaremos los datos de transferencia',
+      icono: Landmark
+    },
+    {
+      nombre: 'Efectivo',
+      descripcion: 'Pago en efectivo',
+      icono: Banknote
+    }
+  ];
+
   return h('main', { className: 'products-page' },
 
     // Encabezado
     h('section', { className: 'products-heading' },
       h('div', { className: 'container-main' },
-        h('span', { className: 'products-eyebrow' },
-          'ELECTRO TECNO'
-        ),
+        h('span', { className: 'products-eyebrow' }, 'ELECTRO TECNO'),
 
         h('h1', null,
           'NUESTROS ',
@@ -354,7 +431,6 @@ function Products() {
         className: 'empty-products'
       }, error),
 
-      // Buscador y ofertas
       h('div', { className: 'catalog-toolbar' },
 
         h('div', { className: 'search-box' },
@@ -380,7 +456,6 @@ function Products() {
         )
       ),
 
-      // Categorías
       h('div', { className: 'category-filters' },
         ...categories.map(item =>
           h('button', {
@@ -395,7 +470,6 @@ function Products() {
         )
       ),
 
-      // Ofertas destacadas
       !loading &&
       !error &&
       !onlyOffers &&
@@ -420,7 +494,6 @@ function Products() {
         )
       ),
 
-      // Catálogo general
       !loading &&
       !error &&
       !onlyOffers &&
@@ -443,7 +516,6 @@ function Products() {
         )
       ),
 
-      // Mostrar todas las ofertas
       !loading &&
       !error &&
       onlyOffers &&
@@ -466,7 +538,6 @@ function Products() {
         )
       ),
 
-      // Sin resultados
       !loading &&
       !error &&
       filteredProducts.length === 0 &&
@@ -498,13 +569,11 @@ function Products() {
     // Carrito lateral
     cartOpen && h('div', {
       className: 'cart-overlay',
-
       onClick: () => setCartOpen(false)
     },
 
       h('aside', {
         className: 'cart-sidebar',
-
         onClick: event => event.stopPropagation()
       },
 
@@ -513,9 +582,7 @@ function Products() {
           h('div', null,
             h('h2', null, 'MI CARRITO'),
 
-            h('span', null,
-              `${totalItems} productos`
-            )
+            h('span', null, `${totalItems} productos`)
           ),
 
           h('button', {
@@ -526,7 +593,6 @@ function Products() {
           )
         ),
 
-        // Productos del carrito
         h('div', { className: 'cart-items' },
 
           cart.length === 0
@@ -561,8 +627,7 @@ function Products() {
                     },
 
                       h('button', {
-                        onClick: () =>
-                          changeQuantity(item.id, -1)
+                        onClick: () => changeQuantity(item.id, -1)
                       },
                         h(Minus, { size: 14 })
                       ),
@@ -570,8 +635,7 @@ function Products() {
                       h('span', null, item.quantity),
 
                       h('button', {
-                        onClick: () =>
-                          changeQuantity(item.id, 1)
+                        onClick: () => changeQuantity(item.id, 1)
                       },
                         h(Plus, { size: 14 })
                       )
@@ -580,9 +644,7 @@ function Products() {
 
                   h('button', {
                     className: 'remove-cart-item',
-
                     onClick: () => removeItem(item.id),
-
                     title: 'Eliminar producto'
                   },
                     h(Trash2, { size: 18 })
@@ -591,7 +653,6 @@ function Products() {
               )
         ),
 
-        // Total y botón de compra
         h('div', { className: 'cart-footer' },
 
           h('div', { className: 'cart-subtotal' },
@@ -609,7 +670,6 @@ function Products() {
 
           h('button', {
             className: 'neon-button checkout-button',
-
             disabled: cart.length === 0,
 
             onClick: () => {
@@ -627,7 +687,7 @@ function Products() {
       )
     ),
 
-    // Formulario de checkout
+    // Formulario de compra
     checkoutOpen && h('div', {
       className: 'checkout-overlay',
 
@@ -640,7 +700,6 @@ function Products() {
 
       h('section', {
         className: 'checkout-modal',
-
         onClick: event => event.stopPropagation()
       },
 
@@ -658,9 +717,7 @@ function Products() {
 
           h('button', {
             type: 'button',
-
             disabled: sendingOrder,
-
             onClick: () => setCheckoutOpen(false)
           },
             h(X, { size: 23 })
@@ -671,6 +728,48 @@ function Products() {
           className: 'checkout-form',
           onSubmit: finishPurchase
         },
+
+          // Aviso de envío estimado
+          h('div', {
+            className: 'shipping-estimate',
+            style: {
+              display: 'flex',
+              alignItems: 'center',
+              gap: '14px',
+              padding: '16px',
+              marginBottom: '22px',
+              background: '#101a12',
+              border: '1px solid rgba(0, 255, 85, 0.35)',
+              borderRadius: '12px',
+              color: '#ffffff'
+            }
+          },
+
+            h(Truck, {
+              size: 30,
+              color: '#00ff55'
+            }),
+
+            h('div', null,
+              h('strong', {
+                style: {
+                  display: 'block',
+                  color: '#00ff55',
+                  marginBottom: '5px'
+                }
+              }, 'ENVÍO ESTIMADO: 3 DÍAS'),
+
+              h('span', {
+                style: {
+                  display: 'block',
+                  fontSize: '13px',
+                  color: '#cccccc'
+                }
+              },
+                `Fecha aproximada de entrega: ${formatearFechaEntrega(calcularFechaEstimada())}`
+              )
+            )
+          ),
 
           h('label', null, 'Nombre completo'),
 
@@ -717,6 +816,51 @@ function Products() {
             rows: 3
           }),
 
+          // Medios de pago
+          h('div', { className: 'payment-section' },
+
+            h('h3', null, 'MEDIO DE PAGO'),
+
+            h('p', null,
+              'Seleccioná cómo preferís realizar el pago.'
+            ),
+
+            h('div', { className: 'payment-methods' },
+
+              ...paymentMethods.map(method => {
+                const PaymentIcon = method.icono;
+                const selected = medioPago === method.nombre;
+
+                return h('button', {
+                  key: method.nombre,
+                  type: 'button',
+
+                  className: selected
+                    ? 'payment-option selected'
+                    : 'payment-option',
+
+                  onClick: () => setMedioPago(method.nombre)
+                },
+
+                  h(PaymentIcon, { size: 23 }),
+
+                  h('span', { className: 'payment-option-info' },
+                    h('strong', null, method.nombre),
+                    h('small', null, method.descripcion)
+                  ),
+
+                  h('span', { className: 'payment-radio' },
+                    selected ? h(CheckCircle2, { size: 20 }) : null
+                  )
+                );
+              })
+            ),
+
+            h('p', { className: 'payment-notice' },
+              'Importante: esta compra es una simulación. No se realizará ningún cobro ni se solicitarán datos bancarios.'
+            )
+          ),
+
           h('div', { className: 'checkout-summary' },
 
             h('span', null, 'Total del pedido'),
@@ -742,6 +886,90 @@ function Products() {
 
             !sendingOrder && h(ArrowRight, { size: 18 })
           )
+        )
+      )
+    ),
+
+    // Confirmación de compra realizada
+    purchaseSuccess && h('div', {
+      className: 'purchase-success-overlay'
+    },
+
+      h('section', {
+        className: 'purchase-success-modal'
+      },
+
+        h('div', { className: 'purchase-success-icon' },
+          h(CheckCircle2, { size: 58 })
+        ),
+
+        h('span', { className: 'purchase-success-eyebrow' },
+          'ELECTRO TECNO'
+        ),
+
+        h('h2', null, '¡COMPRA REALIZADA!'),
+
+        h('p', { className: 'purchase-success-description' },
+          'Tu pedido fue registrado correctamente. ¡Muchas gracias por elegirnos!'
+        ),
+
+        h('div', { className: 'purchase-success-details' },
+
+          h('div', null,
+            h('span', null, 'Número de pedido'),
+            h('strong', null, `#${purchaseSuccess.pedidoId}`)
+          ),
+
+          h('div', null,
+            h('span', null, 'Medio de pago'),
+            h('strong', null, purchaseSuccess.medioPago)
+          ),
+
+          h('div', {
+            style: {
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px'
+            }
+          },
+            h(CalendarDays, {
+              size: 25,
+              color: '#00ff55'
+            }),
+
+            h('div', null,
+              h('span', null, 'Fecha estimada de entrega'),
+
+              h('strong', {
+                style: {
+                  display: 'block',
+                  color: '#00ff55',
+                  marginTop: '4px'
+                }
+              },
+                formatearFechaEntrega(purchaseSuccess.fechaEntrega)
+              )
+            )
+          ),
+
+          h('div', { className: 'success-total' },
+            h('span', null, 'Total de la compra'),
+            h('strong', null,
+              `$${purchaseSuccess.total.toLocaleString('es-AR')}`
+            )
+          )
+        ),
+
+        h('p', { className: 'purchase-success-note' },
+          'Tu pedido quedó registrado y pendiente de confirmación. Esta operación no realizó ningún cobro.'
+        ),
+
+        h('button', {
+          className: 'neon-button purchase-success-button',
+          onClick: () => setPurchaseSuccess(null)
+        },
+          'CONTINUAR COMPRANDO',
+          h(ArrowRight, { size: 18 })
         )
       )
     )
